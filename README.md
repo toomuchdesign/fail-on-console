@@ -189,6 +189,10 @@ Mocha is unsupported due to API incompatibilities related to test context. There
 
 `process.stdout` and `process.stderr` don't exist in a real browser environment, so the `streams` option has no effect under Vitest Browser Mode. `setupConsole` detects this and silently skips stream monitoring rather than throwing. `methods` monitoring is unaffected and works normally.
 
+## Contributing
+
+[docs/testing.md](docs/testing.md) explains how the test suite runs under each supported runner.
+
 ## Credits & Prior Art
 
 This package is inspired by and builds on the excellent foundation laid by:
