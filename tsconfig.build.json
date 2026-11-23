@@ -8,5 +8,5 @@
         "types": ["node"]
     },
     "include": ["./src/"],
-    "exclude": ["**/__tests__/**", "**/__fixtures__/**"]
+    "exclude": ["**/__runner-adapters__/**", "**/__tests__/**", "**/__fixtures__/**"]
 }

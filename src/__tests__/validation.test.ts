@@ -1,4 +1,5 @@
-import {allowConsole, allowStream, setupConsole} from "..";
+import {allowConsole, allowStream, setupConsole} from "#fail-on-console";
+import {afterEach, beforeEach, describe, expect, it} from "#runner-adapter";
 
 const testApi = {beforeEach, afterEach};
 

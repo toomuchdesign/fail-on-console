@@ -172,6 +172,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^21.2.4
         version: 21.2.4
+      '@jest/globals':
+        specifier: ^30.5.2
+        version: 30.5.2(supports-color@8.1.1)
       '@types/node':
         specifier: ~26.6.6
         version: 26.6.6

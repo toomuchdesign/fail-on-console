@@ -13,6 +13,15 @@
         "url": "https://github.com/benquarmby/fail-on-console"
     },
     "license": "MIT",
+    "imports": {
+        "#runner-adapter": {
+            "jest": "./src/__runner-adapters__/jest.ts",
+            "default": "./src/__runner-adapters__/vitest.ts"
+        },
+        "#fail-on-console": {
+            "default": "./src/index.ts"
+        }
+    },
     "exports": {
         ".": "./lib/index.js",
         "./package.json": "./package.json"
@@ -38,6 +47,7 @@
     "devDependencies": {
         "@commitlint/cli": "^21.2.4",
         "@commitlint/config-conventional": "^21.2.4",
+        "@jest/globals": "^30.5.2",
         "@types/node": "~26.6.6",
         "@vitest/coverage-v8": "^5.1.1",
         "del-cli": "^8.0.1",

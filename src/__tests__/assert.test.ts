@@ -1,4 +1,5 @@
-import {allowConsole, setupConsole} from "..";
+import {allowConsole, setupConsole} from "#fail-on-console";
+import {afterEach, beforeEach, describe, expect, it, itFails} from "#runner-adapter";
 
 setupConsole({
     afterEach,
@@ -36,17 +37,17 @@ describe("console.assert monitoring", function () {
         expect(callCount).toBe(0);
     });
 
-    it.fails?.("should fail the test when the condition is false", function () {
+    itFails("should fail the test when the condition is false", function () {
         allowWarnRoute();
         console.assert(false, "completely unexpected assertion");
     });
 
-    it.fails?.("should fail the test when the condition is falsy but not false", function () {
+    itFails("should fail the test when the condition is falsy but not false", function () {
         allowWarnRoute();
         console.assert(0, "completely unexpected assertion");
     });
 
-    it.fails?.("should fail the test when called without arguments", function () {
+    itFails("should fail the test when called without arguments", function () {
         allowWarnRoute();
         console.assert();
     });
@@ -90,7 +91,7 @@ describe("console.assert monitoring", function () {
         console.assert(false, "allowed on its own");
     });
 
-    it.fails?.("should not let an allowed assertion message allow the same console.warn", function () {
+    itFails("should not let an allowed assertion message allow the same console.warn", function () {
         allowConsole("assert", "shared message");
         console.warn("shared message");
     });

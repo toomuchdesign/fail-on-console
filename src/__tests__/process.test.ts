@@ -1,4 +1,5 @@
-import {allowStream} from "..";
+import {allowStream} from "#fail-on-console";
+import {describe, expect, it, itFails} from "#runner-adapter";
 
 describe("process stream monitoring", function () {
     allowStream("stdout", ["expected write from a third-party library"]);
@@ -11,15 +12,15 @@ describe("process stream monitoring", function () {
         process.stdout.write("expected write from a third-party library");
     });
 
-    it.fails?.("should fail the test when an un-allowed stdout write occurs", function () {
+    itFails("should fail the test when an un-allowed stdout write occurs", function () {
         process.stdout.write("completely unexpected output");
     });
 
-    it.fails?.("should fail the test when an un-allowed stderr write occurs", function () {
+    itFails("should fail the test when an un-allowed stderr write occurs", function () {
         process.stderr.write("completely unexpected output");
     });
 
-    it.fails?.("should not treat an allowed stderr message as allowed on stdout", function () {
+    itFails("should not treat an allowed stderr message as allowed on stdout", function () {
         allowStream("stderr", ["only meant for stderr"]);
         process.stdout.write("only meant for stderr");
     });
@@ -72,7 +73,7 @@ describe("process stream monitoring", function () {
         });
 
         describe("sibling describe block", function () {
-            it.fails?.("should fail because the sibling describe rule doesn't leak sideways", function () {
+            itFails("should fail because the sibling describe rule doesn't leak sideways", function () {
                 process.stderr.write("scoped stderr message");
             });
         });
@@ -82,7 +83,7 @@ describe("process stream monitoring", function () {
             process.stdout.write("inline stdout message");
         });
 
-        it.fails?.("should fail because the previous inline rule doesn't leak downward", function () {
+        itFails("should fail because the previous inline rule doesn't leak downward", function () {
             process.stdout.write("inline stdout message");
         });
     });

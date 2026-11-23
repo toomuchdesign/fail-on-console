@@ -1,10 +1,10 @@
 import {defineConfig} from "vitest/config";
 
 const baseConfig = {
-    environment: "node",
-    globals: true
+    environment: "node"
 };
 const assertSuite = "./src/__tests__/assert.test.ts";
+const concurrencySuite = "./src/__tests__/concurrency.test.ts";
 const formattingSuite = "./src/__tests__/formatting.test.ts";
 const validationSuite = "./src/__tests__/validation.test.ts";
 
@@ -20,7 +20,7 @@ export default defineConfig({
                 test: {
                     ...baseConfig,
                     include: ["./src/__tests__/*.test.ts"],
-                    exclude: [assertSuite, formattingSuite, validationSuite],
+                    exclude: [assertSuite, concurrencySuite, formattingSuite, validationSuite],
                     setupFiles: ["./src/__fixtures__/setup.ts"],
                     name: "core"
                 }
@@ -30,6 +30,13 @@ export default defineConfig({
                     ...baseConfig,
                     include: [assertSuite],
                     name: "assert"
+                }
+            },
+            {
+                test: {
+                    ...baseConfig,
+                    include: [concurrencySuite],
+                    name: "concurrency"
                 }
             },
             {

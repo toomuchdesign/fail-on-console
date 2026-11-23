@@ -1,4 +1,5 @@
-import {allowConsole} from "..";
+import {allowConsole} from "#fail-on-console";
+import {afterAll, describe, expect, it, itFails} from "#runner-adapter";
 
 describe("console method monitoring", function () {
     allowConsole("warn", ["expected warning from a third-party library"]);
@@ -25,7 +26,7 @@ describe("console method monitoring", function () {
         console.info("unexpected inline info message");
     });
 
-    it.fails?.("should fail the test when an un-allowed console error occurs", function () {
+    itFails("should fail the test when an un-allowed console error occurs", function () {
         console.warn("completely unexpected warning");
     });
 
@@ -80,7 +81,7 @@ describe("console method monitoring", function () {
         });
 
         describe("sibling describe block", function () {
-            it.fails?.("should fail because the sibling describe rule doesn't leak sideways", function () {
+            itFails("should fail because the sibling describe rule doesn't leak sideways", function () {
                 console.error("scoped error message");
             });
         });
@@ -90,16 +91,24 @@ describe("console method monitoring", function () {
             console.warn("inline warn message");
         });
 
-        it.fails?.("should fail because the previous inline rule doesn't leak downward", function () {
+        itFails("should fail because the previous inline rule doesn't leak downward", function () {
             console.warn("inline warn message");
         });
     });
 });
 
-// Jest has no it.fails, and rejects afterAll in a describe block without tests.
-if (it.fails) {
-    describe("restoring after a failing test", function () {
-        const originals = [
+describe("restoring after a failing test", function () {
+    const originals = [
+        console.error,
+        console.warn,
+        console.info,
+        console.log,
+        process.stdout.write,
+        process.stderr.write
+    ];
+
+    afterAll(function () {
+        const current = [
             console.error,
             console.warn,
             console.info,
@@ -107,21 +116,10 @@ if (it.fails) {
             process.stdout.write,
             process.stderr.write
         ];
-
-        afterAll(function () {
-            const current = [
-                console.error,
-                console.warn,
-                console.info,
-                console.log,
-                process.stdout.write,
-                process.stderr.write
-            ];
-            expect(current).toEqual(originals);
-        });
-
-        it.fails("should fail on an un-allowed console.warn", function () {
-            console.warn("unexpected warning between other monitored methods");
-        });
+        expect(current).toEqual(originals);
     });
-}
+
+    itFails("should fail on an un-allowed console.warn", function () {
+        console.warn("unexpected warning between other monitored methods");
+    });
+});
