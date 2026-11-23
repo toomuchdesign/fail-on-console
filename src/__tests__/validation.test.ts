@@ -1,4 +1,5 @@
-import {allowConsole, allowStream, setupConsole} from "..";
+import {allowConsole, allowStream, setupConsole} from "#fail-on-console";
+import {afterEach, beforeEach, describe, expect, it} from "#runner-adapter";
 
 const testApi = {beforeEach, afterEach};
 
@@ -68,6 +69,13 @@ describe("fail-on-console setup validation", function () {
         // @ts-expect-error - testing unsupported streams
         expect(() => setupConsole({...testApi, streams})).toThrow(
             'fail-on-console: One or more unsupported process streams provided: "nope", "yep". Supported process streams are: "stderr", "stdout".'
+        );
+    });
+
+    it("should require the hooks passed to setupConsole, not the global ones", function () {
+        // @ts-expect-error - testing missing hook
+        expect(() => setupConsole({afterEach})).toThrow(
+            "fail-on-console: beforeEach and afterEach hooks must be provided."
         );
     });
 });

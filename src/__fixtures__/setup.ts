@@ -1,5 +1,6 @@
+import {allowConsole, allowStream, setupConsole} from "#fail-on-console";
+import {afterEach, beforeEach} from "#runner-adapter";
 import {format} from "util";
-import {allowConsole, allowStream, setupConsole} from "..";
 
 setupConsole({
     afterEach,

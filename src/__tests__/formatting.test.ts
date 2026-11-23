@@ -1,4 +1,5 @@
-import {type ConsoleMethod, allowConsole, setupConsole} from "..";
+import {type ConsoleMethod, allowConsole, setupConsole} from "#fail-on-console";
+import {afterEach, beforeEach, describe, expect, it, itFails} from "#runner-adapter";
 
 setupConsole({afterEach, beforeEach});
 
@@ -56,7 +57,7 @@ describe("console formatting", function () {
         console.warn();
     });
 
-    it.fails?.("should fail the test when the formatted message doesn't match what's expected", function () {
+    itFails("should fail the test when the formatted message doesn't match what's expected", function () {
         expectFormattedMessage("error", "this does not match");
 
         console.error("hello %s", "world");
