@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.6.0](https://github.com/toomuchdesign/fail-on-console/compare/v1.5.2...v1.6.0) (2026-11-23)
+
+
+### Features
+
+* add initial fail-on-console implementation ([a414cbf](https://github.com/toomuchdesign/fail-on-console/commit/a414cbfb129443a2fd1d369d4f37c6b54fe90aa5))
+* add setupConsole export ([073ba69](https://github.com/toomuchdesign/fail-on-console/commit/073ba69ce1b7e07d09880ef110aea55f34b7f995))
+* do not require expect API in setupConsole ([04c0bad](https://github.com/toomuchdesign/fail-on-console/commit/04c0bad55f39773e6fb326f6364a5c64d46b3e0f))
+* support console.assert ([ae4daeb](https://github.com/toomuchdesign/fail-on-console/commit/ae4daeba2510fb6b0364282807a30e0b4e07a1b3))
+* support custom format functions ([25908c3](https://github.com/toomuchdesign/fail-on-console/commit/25908c3e9219eb607a944d269188db0113376ddd))
+* support process.stdout and process.stderr monitoring ([a79f82f](https://github.com/toomuchdesign/fail-on-console/commit/a79f82fa6ea778d44e8a59654f89bdd66464ab76))
+
+
+### Bug Fixes
+
+* add defense for incorrect format argument ([717ee97](https://github.com/toomuchdesign/fail-on-console/commit/717ee97e815157a411b695e8c16a772f96eb1eec))
+* add defense for missing hooks ([6e5323b](https://github.com/toomuchdesign/fail-on-console/commit/6e5323b433dce8cfa5ad9e9ffd911c648d8721c6))
+* add missing keywords and refine description ([3d8688a](https://github.com/toomuchdesign/fail-on-console/commit/3d8688aa33ce9a717adb7e01b0f8431cbd86ea0e))
+* add repository reference ([a749a1c](https://github.com/toomuchdesign/fail-on-console/commit/a749a1c5134b7cb3cf7109d317e62e082042bd6f))
+* check the hooks passed to setupConsole ([e03984a](https://github.com/toomuchdesign/fail-on-console/commit/e03984ab4bd0fd9d8c3be9aab9c8e076e36c34f0))
+* deprecate setup export ([21f732a](https://github.com/toomuchdesign/fail-on-console/commit/21f732a1b48420818d055f0dace57eab3e4eb69e))
+* guard against invalid and unsupported console methods ([504fa30](https://github.com/toomuchdesign/fail-on-console/commit/504fa301e245d0965afdfaf3c31d2d3b9a0cb10c))
+* include license ([af9f90d](https://github.com/toomuchdesign/fail-on-console/commit/af9f90df7bf5fd13a832adb6fa39202b9ddcb6d7))
+* limit public exports ([c26ad16](https://github.com/toomuchdesign/fail-on-console/commit/c26ad16fc0d6753478c8768d5d4fe491e37c09ba))
+* properly document custom format option ([5456c53](https://github.com/toomuchdesign/fail-on-console/commit/5456c533f423beded7a4d1e9046beb29c26e420b))
+* use correct rule type for allowStream declaration ([23fe420](https://github.com/toomuchdesign/fail-on-console/commit/23fe42050a7a46959ea6f2b68204a41e424bcacc))
+
 ## [1.5.2](https://github.com/benquarmby/fail-on-console/compare/v1.5.1...v1.5.2) (2026-11-23)
 
 
