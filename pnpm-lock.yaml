@@ -184,6 +184,9 @@ importers:
       del-cli:
         specifier: ^8.0.1
         version: 8.0.1
+      expect:
+        specifier: ^30.5.2
+        version: 30.5.2
       jest:
         specifier: ^30.5.2
         version: 30.5.2(@types/node@26.6.6)(supports-color@8.1.1)

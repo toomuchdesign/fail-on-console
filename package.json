@@ -1,10 +1,11 @@
 {
     "name": "fail-on-console",
     "version": "1.5.1",
-    "description": "Fail Vitest or Jest tests when unexpected console logs, warnings or errors occur.",
+    "description": "Fail Vitest, Jest or node:test tests when unexpected console logs, warnings or errors occur.",
     "keywords": [
         "jest",
         "vitest",
+        "node:test",
         "console",
         "testing"
     ],
@@ -15,10 +16,12 @@
     "license": "MIT",
     "imports": {
         "#runner-adapter": {
+            "node-test": "./src/__runner-adapters__/node.ts",
             "jest": "./src/__runner-adapters__/jest.ts",
             "default": "./src/__runner-adapters__/vitest.ts"
         },
         "#fail-on-console": {
+            "node-test": "./lib/index.js",
             "default": "./src/index.ts"
         }
     },
@@ -38,11 +41,17 @@
         "commit:check": "commitlint --from-last-tag",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "test": "run-s test:vitest test:jest",
+        "test": "run-s test:vitest test:jest test:node",
         "test:jest": "jest",
         "test:vitest": "vitest run --coverage",
         "unused:check": "knip",
-        "verify": "run-s commit:check format:check unused:check clean build test:vitest test:jest"
+        "verify": "run-s commit:check format:check unused:check clean test",
+        "test:node": "run-s build \"test:node:*\"",
+        "test:node:assert": "node --test --conditions=node-test --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/__tests__/assert.test.ts",
+        "test:node:concurrency": "node --test --conditions=node-test --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/__tests__/concurrency.test.ts",
+        "test:node:core": "node --test --conditions=node-test --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./src/__fixtures__/setup.ts src/__tests__/console.test.ts src/__tests__/core.test.ts src/__tests__/process.test.ts",
+        "test:node:formatting": "node --test --conditions=node-test --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/__tests__/formatting.test.ts",
+        "test:node:validation": "node --test --conditions=node-test --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/__tests__/validation.test.ts"
     },
     "devDependencies": {
         "@commitlint/cli": "^21.2.4",
@@ -51,6 +60,7 @@
         "@types/node": "~26.6.6",
         "@vitest/coverage-v8": "^5.1.1",
         "del-cli": "^8.0.1",
+        "expect": "^30.5.2",
         "jest": "^30.5.2",
         "knip": "^6.47.0",
         "npm-run-all2": "^9.1.0",

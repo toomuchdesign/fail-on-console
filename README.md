@@ -1,6 +1,6 @@
 # Fail on Console
 
-Fail Vitest or Jest tests when unexpected console logs, warnings or errors occur.
+Fail Vitest, Jest or `node:test` tests when unexpected console logs, warnings or errors occur.
 
 [![npm version](https://img.shields.io/npm/v/fail-on-console.svg)](https://www.npmjs.com/package/fail-on-console)
 [![license](https://img.shields.io/npm/l/fail-on-console.svg)](https://github.com/benquarmby/fail-on-console/blob/main/LICENSE)
@@ -9,7 +9,7 @@ The `fail-on-console` utility fails test suites whenever unexpected `console` ou
 
 ## Features
 
-- **⚡ Vitest and Jest Native**: Seamless integration with Vitest (including Browser Mode) and Jest using standard lifecycle hooks.
+- **⚡ Vitest, Jest and `node:test` Native**: Seamless integration with Vitest (including Browser Mode), Jest and the Node.js test runner using standard lifecycle hooks.
 - **📡 Raw Stream Monitoring:** Fails on unexpected writes to `process.stdout` or `process.stderr` on top of standard console calls. Output from libraries that write directly to the stream doesn't slip through.
 - **🪶 Zero Dependencies**: Pure, lightweight JavaScript with a tiny footprint.
 - **🎯 Configurable Targets**: Choose exactly which console methods and / or process streams to monitor.
@@ -52,6 +52,22 @@ import {beforeEach, afterEach} from "@jest/globals";
 import {setupConsole} from "fail-on-console";
 
 setupConsole({beforeEach, afterEach});
+```
+
+### With node:test
+
+Initialize `setupConsole` inside a module preloaded with [`--import`](https://nodejs.org/api/cli.html#--importmodule) (e.g., `setup.mjs`).
+
+```js
+// setup.mjs
+import {beforeEach, afterEach} from "node:test";
+import {setupConsole} from "fail-on-console";
+
+setupConsole({beforeEach, afterEach});
+```
+
+```sh
+node --import ./setup.mjs --test
 ```
 
 ### Customizing Monitored Methods and Streams
@@ -163,7 +179,7 @@ Registers a temporary or global allowlist rule for a monitored process stream.
 
 ### Concurrency
 
-`fail-on-console` is not compatible with concurrent asynchronous tests (e.g., `test.concurrent`). Because concurrent tests execute simultaneously within the same environment context, console logs cannot be isolated reliably per individual test. For suites requiring specific log suppression, tests must be run sequentially.
+`fail-on-console` is not compatible with concurrent asynchronous tests (e.g., `test.concurrent`, or `{concurrency: true}` in `node:test`). Because concurrent tests execute simultaneously within the same environment context, console logs cannot be isolated reliably per individual test. For suites requiring specific log suppression, tests must be run sequentially.
 
 ### Mocha
 
